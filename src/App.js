@@ -36,7 +36,7 @@ class App extends Component {
     let added = this.state.datas.filter(x => x.id === id);
     console.log(added)
     let tmp = this.state.cards
-    tmp.push(<Card id={added[0].id} name={added[0].name}  imageUrl={added[0].imageUrl} RemoveCard={this.RemoveCard}></Card>)
+    tmp.push(<Card id={added[0].id} name={added[0].name}  imageUrl={added[0].imageUrl} RemoveCard={this.RemoveCard} type={added[0].type}></Card>)
     this.setState({cards: tmp});
   }
   RemoveCard = (id) => {
@@ -46,6 +46,33 @@ class App extends Component {
     console.log(this.state.cards)
     console.log(removed)
     this.setState({cards: removed});
+  }
+  onlyUnique = (value, index, self) => { 
+    return self.indexOf(value) === index;
+  }
+  Search = ()=>{
+    let search_val = document.getElementById("textbox").value;
+    let data_name = null;
+    fetch('http://localhost:3030/api/cards?name='+search_val)
+      .then(response => {return response.json();})
+      .then(data =>{
+        data_name = data.cards;
+      })
+      .then(
+        fetch('http://localhost:3030/api/cards?type='+search_val)
+        .then(result =>{return result.json();})
+        .then(out =>{
+          let data_type = out.cards
+          let data_all = data_name.concat(data_type)
+          data_all = data_all.filter(this.onlyUnique)
+          let tmp_select = [];
+          data_all.forEach(element => {
+            console.log(element.name,element.imageUrl)
+            tmp_select.push(<CardLong id={element.id} name={element.name}  imageUrl={element.imageUrl} Add={this.Add} type={element.type}></CardLong>)
+          })
+          this.setState({ data_to_select:tmp_select})
+        })
+      );
   }
   componentDidMount() {
     fetch('http://localhost:3030/api/cards')
@@ -83,7 +110,7 @@ class App extends Component {
         </div>
         <div id="Modal">
           <div id="Close" onClick={this.CloseModal}>X</div>
-          <input id="textbox" type="text" name="search"></input>
+          <input id="textbox" type="text" name="search" onChange={this.Search}></input>
           <div id="ModalBackground">
             {this.state.data_to_select}
           </div>
@@ -110,6 +137,7 @@ class Card extends Component{
         <div id="right">
             <div class="data_name" onClick={this.RemoveCard}>Remove</div>
             <div class="data_name">{this.props.name}</div>
+            <div class="data_name">{this.props.type}</div>
         </div>
       </div>
     )
@@ -131,6 +159,7 @@ class CardLong extends Component{
         <div id="right_modal">
             <div class="data_name" onClick={this.Add}>Add</div>
             <div class="data_name">{this.props.name}</div>
+            <div class="data_name">{this.props.type}</div>
         </div>
       </div>
     )
