@@ -1,0 +1,130 @@
+@import url('https://fonts.google.com/specimen/Atma?selection.family=Atma');
+@import url('https://fonts.google.com/specimen/Gaegu');
+
+#TopBar{
+    position: absolute;
+    top: 0px;
+    left:0px;
+    width: 97%;
+    font-family: "Atma";
+    text-align: center;
+    font-size: 50px;
+    height:80px;
+    padding: 15px;
+}
+
+#BottomBar{
+    position: absolute;
+    width: 97%;
+    bottom: 0px;
+    left: 0px;
+    font-family: "Atma";
+    text-align: center;
+    font-size: 50px;
+    height:80px;
+    padding: 15px;
+    background-color: #ec5656;
+    color:#ffffff;
+
+}
+
+#Background{
+    display: inline-block;
+    overflow-y: scroll;
+    width:1020px;
+    height:548px;
+    margin-top: 110px;
+    margin-bottom: 110px;
+}
+
+
+#left{
+    float: left;
+    width: 222px;
+    height: 300px;
+    padding: 10px;
+}
+
+#right{
+    float: right;
+    width: 222px;
+    height: 300px;
+    padding: 10px;
+}
+
+
+#Card{
+    display: inline-block;
+    margin-left: 10px;
+    font-family: "Atma";
+    width: 495px;
+    height: 300px;
+    background-color: #f3f4f7;
+    margin-bottom:10px;
+    box-shadow: 10px 10px 5px #d5d6dc;
+}
+#Card:hover{
+    margin-bottom:10px;
+    box-shadow: 10px 10px 5px #aeaeae;
+}
+
+.data_name{
+    font-size:40px;
+    font-family:"Gaegu";
+}
+
+#Modal{
+    display: inline-block;
+    background-color: #ffffff;
+    position: absolute;
+    top: 10px;
+    left:10px;
+    width: 975px;
+    font-family: "Atma";
+    font-size: 50px;
+    height:720px;
+    padding: 15px;
+    box-shadow: 5px 10px 8px 10px #474444;
+}
+#ModalBackground{
+    display: inline-block;
+    overflow-y: scroll;
+    top: 10px;
+    left:10px;
+    width: 975px;
+    height:510px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#textbox{
+    width: 950px;
+    height: 100px;
+}
+
+#Close{
+    text-align:right;
+}
+
+#CardLong{
+    display: inline-block;
+    margin-left: 10px;
+    font-family: "Atma";
+    width: 950px;
+    height: 300px;
+    background-color: #f3f4f7;
+    margin-bottom:10px;
+    box-shadow: 10px 10px 5px #d5d6dc;
+}
+
+#CardLong:hover{
+    box-shadow: 10px 10px 5px #aeaeae;
+}
+
+
+#right_modal{
+    float: right;
+    width: 500px;
+    height: 300px;
+    padding: 10px;
+    text-align:left;
+}
