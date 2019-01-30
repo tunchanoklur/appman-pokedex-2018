@@ -38,6 +38,8 @@ class App extends Component {
     let tmp = this.state.cards
     tmp.push(<Card id={added[0].id} name={added[0].name}  imageUrl={added[0].imageUrl} RemoveCard={this.RemoveCard} type={added[0].type}></Card>)
     this.setState({cards: tmp});
+    let remove_search = this.state.data_to_select.filter((x) => x.props.id !== added[0].id)
+    this.setState({data_to_select: remove_search});
   }
   RemoveCard = (id) => {
     console.log("parent remove")
@@ -52,7 +54,8 @@ class App extends Component {
   }
   Search = ()=>{
     let search_val = document.getElementById("textbox").value;
-    let data_name = null;
+    let data_name = [];
+    let tmp_select = [];
     fetch('http://localhost:3030/api/cards?name='+search_val)
       .then(response => {return response.json();})
       .then(data =>{
@@ -65,11 +68,13 @@ class App extends Component {
           let data_type = out.cards
           let data_all = data_name.concat(data_type)
           data_all = data_all.filter(this.onlyUnique)
-          let tmp_select = [];
           data_all.forEach(element => {
             console.log(element.name,element.imageUrl)
             tmp_select.push(<CardLong id={element.id} name={element.name}  imageUrl={element.imageUrl} Add={this.Add} type={element.type}></CardLong>)
           })
+          let selected_id = this.state.cards.map(a => a.props.id);
+          console.log(selected_id)
+          tmp_select = tmp_select.filter((tmp)=> !selected_id.includes(tmp.props.id))
           this.setState({ data_to_select:tmp_select})
         })
       );
