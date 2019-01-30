@@ -36,8 +36,16 @@ class App extends Component {
     let added = this.state.datas.filter(x => x.id === id);
     console.log(added)
     let tmp = this.state.cards
-    tmp.push(<Card id={added[0].id} name={added[0].name}  imageUrl={added[0].imageUrl}></Card>)
+    tmp.push(<Card id={added[0].id} name={added[0].name}  imageUrl={added[0].imageUrl} RemoveCard={this.RemoveCard}></Card>)
     this.setState({cards: tmp});
+  }
+  RemoveCard = (id) => {
+    console.log("parent remove")
+    console.log(id)
+    let removed = this.state.cards.filter(x => x.props.id !== id);
+    console.log(this.state.cards)
+    console.log(removed)
+    this.setState({cards: removed});
   }
   componentDidMount() {
     fetch('http://localhost:3030/api/cards')
@@ -88,6 +96,11 @@ class App extends Component {
 export default App
 
 class Card extends Component{
+  RemoveCard=()=>{
+    console.log("child remove")
+    console.log(this.props.id)
+    this.props.RemoveCard(this.props.id)
+  }
   render(){
     return(
       <div id="Card" key={this.props.id}>
@@ -95,6 +108,7 @@ class Card extends Component{
           <img src={this.props.imageUrl} alt={this.props.imageUrl} class="transparent" width="200px"></img>
         </div>
         <div id="right">
+            <div class="data_name" onClick={this.RemoveCard}>Remove</div>
             <div class="data_name">{this.props.name}</div>
         </div>
       </div>

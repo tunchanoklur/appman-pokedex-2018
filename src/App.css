@@ -99,6 +99,8 @@
 #textbox{
     width: 950px;
     height: 100px;
+    font-size: 40px;
+    font-family: "Gaegu";
 }
 
 #Close{
